@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | Findly Campus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="auth-body">
+  <div class="noise"></div>
+
+  <main class="auth-shell compact-visual">
+    <section class="auth-visual">
+      <a class="brand brand-light" href="index.html">
+        <span class="brand-mark">F</span><span>Findly Campus</span>
+      </a>
+
+      <div class="visual-copy">
+        <span class="eyebrow light">JOIN YOUR CAMPUS NETWORK</span>
+        <h1>Every report becomes <span>a useful clue.</span></h1>
+        <p>Create an account, verify your college email, then start reporting and matching items.</p>
+
+        <div class="feature-chips">
+          <span>✓ Smart ranking</span>
+          <span>✓ Campus zones</span>
+          <span>✓ Privacy-first demo</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-panel">
+      <div class="auth-card">
+        <span class="eyebrow">STUDENT REGISTRATION</span>
+        <h2>Create your account</h2>
+        <p class="muted">Use a valid email. You will verify it before signing in.</p>
+
+        <div id="authMessage" class="form-message hidden"></div>
+
+        <form id="signupForm" class="stack-form">
+          <label>Full name
+            <div class="input-wrap">
+              <span class="input-icon">●</span>
+              <input id="signupName" type="text" placeholder="Your name" required>
+            </div>
+          </label>
+
+          <label>College email
+            <div class="input-wrap">
+              <span class="input-icon">✉</span>
+              <input id="signupEmail" type="email" placeholder="you@campus.edu" required>
+            </div>
+          </label>
+
+          <label>Password
+            <div class="input-wrap">
+              <span class="input-icon">⌁</span>
+              <input id="signupPassword" type="password" placeholder="Min 8 chars, upper, lower & number" required>
+              <button class="icon-btn" type="button" data-toggle-password="signupPassword">◉</button>
+            </div>
+          </label>
+
+          <label>Confirm password
+            <div class="input-wrap">
+              <span class="input-icon">⌁</span>
+              <input id="signupConfirm" type="password" placeholder="Repeat password" required>
+            </div>
+          </label>
+
+          <button class="primary-btn" type="submit">
+            Create & verify account <span>→</span>
+          </button>
+        </form>
+
+        <p class="center muted">Already registered? <a href="index.html">Sign in</a></p>
+      </div>
+    </section>
+  </main>
+
+  <div id="verifyModal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-icon">✉</div>
+      <span class="eyebrow">EMAIL VERIFICATION</span>
+      <h3>Check the demo verification code</h3>
+      <p id="verifyCopy" class="muted"></p>
+
+      <div class="otp-row">
+        <input class="otp" maxlength="1" inputmode="numeric">
+        <input class="otp" maxlength="1" inputmode="numeric">
+        <input class="otp" maxlength="1" inputmode="numeric">
+        <input class="otp" maxlength="1" inputmode="numeric">
+        <input class="otp" maxlength="1" inputmode="numeric">
+        <input class="otp" maxlength="1" inputmode="numeric">
+      </div>
+
+      <div id="otpHint" class="otp-hint"></div>
+      <button id="verifyOtpBtn" class="primary-btn">Verify email</button>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

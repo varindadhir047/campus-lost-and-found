@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Findly Campus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="app-body">
+  <aside class="sidebar">
+    <a class="brand" href="dashboard.html"><span class="brand-mark">F</span><span>Findly</span></a>
+
+    <nav>
+      <a class="nav-item active" href="#overview" data-view="overview"><span>⌂</span> Overview</a>
+      <a class="nav-item" href="#report" data-view="report"><span>＋</span> Report item</a>
+      <a class="nav-item" href="#browse" data-view="browse"><span>⌕</span> Browse reports</a>
+      <a class="nav-item" href="#matches" data-view="matches"><span>✦</span> Smart matches</a>
+      <a class="nav-item" href="#myreports" data-view="myreports"><span>▤</span> My reports</a>
+    </nav>
+
+    <div class="sidebar-card">
+      <div class="sidebar-spark">✦</div>
+      <strong>Findly Match System</strong>
+      <p>Matches reports using simple JavaScript conditions and scores.</p>
+    </div>
+
+    <button id="logoutBtn" class="logout-btn"><span>↪</span> Sign out</button>
+  </aside>
+
+  <main class="app-main">
+    <header class="topbar">
+      <button id="mobileMenuBtn" class="mobile-menu">☰</button>
+
+      <div>
+        <p class="top-kicker">CAMPUS LOST & FOUND</p>
+        <h2 id="pageTitle">Overview</h2>
+      </div>
+
+      <div class="top-actions">
+        <button class="circle-btn" id="seedBtn" title="Load sample data">✦</button>
+
+        <div class="user-chip">
+          <div class="avatar" id="userAvatar">S</div>
+          <div>
+            <strong id="userName">Student</strong>
+            <span id="userEmail">student@campus.edu</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- OVERVIEW -->
+    <section id="overviewView" class="view active-view">
+      <div class="hero-panel">
+        <div>
+          <span class="eyebrow light">SMARTER THAN A NOTICE BOARD</span>
+          <h1>Turn lost-item reports into <span>ranked leads.</span></h1>
+          <p>Findly compares category, color, campus zone, date and description to find possible matches.</p>
+
+          <div class="hero-actions">
+            <button class="light-btn" data-jump="report">Report an item</button>
+            <button class="ghost-light-btn" data-jump="matches">View smart matches</button>
+          </div>
+        </div>
+
+        <div class="match-orbit">
+          <div class="orbit-core"><b id="heroMatchCount">0</b><span>reports</span></div>
+          <div class="orbit-dot dot-a">⌖</div>
+          <div class="orbit-dot dot-b">✦</div>
+          <div class="orbit-dot dot-c">◈</div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon lost">?</div>
+          <div><span>Open lost reports</span><strong id="statLost">0</strong></div>
+          <small>Need a match</small>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon found">✓</div>
+          <div><span>Open found reports</span><strong id="statFound">0</strong></div>
+          <small>Waiting for owner</small>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon match">✦</div>
+          <div><span>Strong matches</span><strong id="statMatches">0</strong></div>
+          <small>Score ≥ 70%</small>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon recovery">↗</div>
+          <div><span>Recovery potential</span><strong id="statRecovery">0%</strong></div>
+          <small>Based on current reports</small>
+        </article>
+      </div>
+
+      <div class="content-grid">
+        <section class="panel">
+          <div class="panel-head">
+            <div><span class="eyebrow">RECENT ACTIVITY</span><h3>Latest campus reports</h3></div>
+            <button class="text-btn" data-jump="browse">See all →</button>
+          </div>
+          <div id="recentList" class="report-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div><span class="eyebrow">MATCH SYSTEM</span><h3>How scoring works</h3></div>
+            <span class="live-pill"><i></i> Live</span>
+          </div>
+
+          <div class="weight-list">
+            <div><span>Category</span><div class="weight-track"><i style="width:30%"></i></div><b>30%</b></div>
+            <div><span>Color</span><div class="weight-track"><i style="width:20%"></i></div><b>20%</b></div>
+            <div><span>Zone</span><div class="weight-track"><i style="width:20%"></i></div><b>20%</b></div>
+            <div><span>Date</span><div class="weight-track"><i style="width:15%"></i></div><b>15%</b></div>
+            <div><span>Description</span><div class="weight-track"><i style="width:15%"></i></div><b>15%</b></div>
+          </div>
+
+          <div class="formula-box">Final score = signal score × weight</div>
+        </section>
+      </div>
+    </section>
+
+    <!-- REPORT ITEM -->
+    <section id="reportView" class="view">
+      <div class="section-intro">
+        <div>
+          <span class="eyebrow">NEW REPORT</span>
+          <h1>Describe the item. We'll compare the clues.</h1>
+          <p>Add clear item details to improve matching.</p>
+        </div>
+      </div>
+
+      <div class="report-layout">
+        <form id="itemForm" class="panel report-form">
+          <div class="type-toggle">
+            <button type="button" class="type-btn active" data-type="lost">I lost an item</button>
+            <button type="button" class="type-btn" data-type="found">I found an item</button>
+          </div>
+
+          <input type="hidden" id="itemType" value="lost">
+
+          <div class="form-grid">
+            <label>Category
+              <select id="category" required>
+                <option value="">Choose category</option>
+                <option>Electronics</option><option>Bag</option><option>ID / Cards</option>
+                <option>Keys</option><option>Books</option><option>Clothing</option>
+                <option>Accessories</option><option>Bottle</option><option>Other</option>
+              </select>
+            </label>
+
+            <label>Primary color
+              <select id="color" required>
+                <option value="">Choose color</option>
+                <option>Black</option><option>White</option><option>Blue</option><option>Red</option>
+                <option>Green</option><option>Grey</option><option>Brown</option><option>Yellow</option>
+                <option>Pink</option><option>Silver</option><option>Gold</option><option>Multicolor</option>
+              </select>
+            </label>
+
+            <label>Campus zone
+              <select id="zone" required>
+                <option value="">Choose zone</option>
+                <option>Main Gate</option><option>Admin Block</option><option>Academic Block</option>
+                <option>Library</option><option>Cafeteria</option><option>Sports Complex</option>
+                <option>Hostel A</option><option>Hostel B</option><option>Parking</option>
+              </select>
+            </label>
+
+            <label>Date
+              <input id="itemDate" type="date" required>
+            </label>
+          </div>
+
+          <label>Short title
+            <input id="title" type="text" maxlength="70" placeholder="e.g. Black HP laptop backpack" required>
+          </label>
+
+          <label>Description
+            <textarea id="description" rows="5" maxlength="420" placeholder="Add brand, stickers, scratches, keychain or other details..." required></textarea>
+            <span class="char-count"><b id="charCount">0</b>/420</span>
+          </label>
+
+          <label>Contact preference
+            <select id="contact">
+              <option>Contact through registered email</option>
+              <option>Meet at campus security desk</option>
+              <option>Contact through class representative</option>
+            </select>
+          </label>
+
+          <button class="primary-btn" type="submit">Publish report & find matches <span>✦</span></button>
+        </form>
+
+        <aside class="panel tips-panel">
+          <span class="eyebrow">MATCH QUALITY</span>
+          <h3>Make your report easier to match</h3>
+
+          <div class="quality-score">
+            <div id="qualityRing" class="quality-ring">
+              <span id="qualityValue">20</span><small>/100</small>
+            </div>
+            <p id="qualityText">Start adding specific clues.</p>
+          </div>
+
+          <div class="tips-list">
+            <p><b>01</b><span><strong>Use the exact category</strong><small>Important matching field</small></span></p>
+            <p><b>02</b><span><strong>Choose the closest zone</strong><small>Helps compare locations</small></span></p>
+            <p><b>03</b><span><strong>Add unique description words</strong><small>Brand, sticker, damage or contents</small></span></p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- BROWSE -->
+    <section id="browseView" class="view">
+      <div class="section-intro row-intro">
+        <div><span class="eyebrow">CAMPUS REPORTS</span><h1>Browse all active reports.</h1></div>
+        <button class="primary-btn narrow" data-jump="report">+ New report</button>
+      </div>
+
+      <div class="filter-bar panel">
+        <input id="searchInput" type="search" placeholder="Search title or description...">
+        <select id="filterType">
+          <option value="all">Lost & found</option>
+          <option value="lost">Lost only</option>
+          <option value="found">Found only</option>
+        </select>
+        <select id="filterCategory"><option value="all">All categories</option></select>
+        <select id="filterZone"><option value="all">All zones</option></select>
+      </div>
+
+      <div id="browseGrid" class="cards-grid"></div>
+    </section>
+
+    <!-- MATCHES -->
+    <section id="matchesView" class="view">
+      <div class="section-intro">
+        <div>
+          <span class="eyebrow">SMART MATCHING</span>
+          <h1>Possible lost ↔ found matches.</h1>
+          <p>Reports are compared using category, color, zone, date and description.</p>
+        </div>
+      </div>
+
+      <div id="matchPairs" class="match-pairs"></div>
+    </section>
+
+    <!-- MY REPORTS -->
+    <section id="myreportsView" class="view">
+      <div class="section-intro row-intro">
+        <div><span class="eyebrow">YOUR ACTIVITY</span><h1>My reports</h1></div>
+        <button class="primary-btn narrow" data-jump="report">+ Add report</button>
+      </div>
+
+      <div id="myReportsGrid" class="cards-grid"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <div id="matchModal" class="modal hidden">
+    <div class="modal-card match-modal-card">
+      <button id="closeMatchModal" class="modal-close">×</button>
+      <span class="eyebrow">MATCH EXPLANATION</span>
+      <h3 id="modalMatchTitle">Why these reports match</h3>
+      <div id="modalMatchBody"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
