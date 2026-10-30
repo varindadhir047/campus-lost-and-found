@@ -17,7 +17,7 @@ This starter preserves the seven original Phase 1 frontend files in `frontend/` 
 
 ## Not implemented yet
 
-- Item/User MongoDB models, authentication/JWT, CRUD APIs, server-side scoring, frontend API integration, image upload, claims, map, or deployment. These are subsequent steps.
+- map feature, edit feature.
 
 ## GitHub
 
